@@ -1,3 +1,4 @@
+#![windows_subsystem = "windows"]
 use eframe::egui;
 use egui_code_editor::{CodeEditor, ColorTheme, Syntax};
 use serde::{Deserialize, Serialize};
@@ -132,12 +133,16 @@ impl VerilogApp {
         let iverilog = self.get_tool_path("iverilog");
         let vvp = self.get_tool_path("vvp");
         let gtkwave = self.get_tool_path("gtkwave");
+        
+        // Icarus Root for internal modules
         let ivl_root = iverilog.parent().unwrap().parent().unwrap().join("lib/ivl");
 
         let mut args = vec!["-o".to_string(), "sim.vvp".to_string()];
         for f in &proj.source_files {
             if let Some(s) = f.to_str() { args.push(s.to_string()); }
         }
+
+        self.console_output += "Compiling...\n";
 
         let compile = Command::new(&iverilog)
             .env("IVL_ROOT", &ivl_root)
@@ -147,12 +152,40 @@ impl VerilogApp {
 
         match compile {
             Ok(out) if out.status.success() => {
-                let _ = Command::new(vvp).current_dir(&proj.root).arg("sim.vvp").output();
-                let _ = Command::new(gtkwave).current_dir(&proj.root).arg("dump.vcd").spawn();
-                self.console_output += "Simulation Success!\n";
+                // 1. Run VVP to generate dump.vcd
+                let vvp_output = Command::new(&vvp)
+                    .current_dir(&proj.root)
+                    .arg("sim.vvp")
+                    .output();
+
+                if let Ok(v_out) = vvp_output {
+                    if !v_out.status.success() {
+                        self.console_output += &format!("Runtime Error: {}\n", String::from_utf8_lossy(&v_out.stderr));
+                        return;
+                    }
+                }
+
+                // 2. Check if dump.vcd exists before launching GTKWave
+                let vcd_path = proj.root.join("dump.vcd");
+                if !vcd_path.exists() {
+                    self.console_output += "Error: Simulation finished but no 'dump.vcd' found. Did you include $dumpfile(\"dump.vcd\"); in your testbench?\n";
+                    return;
+                }
+
+                // 3. Launch GTKWave
+                // We use spawn() so it doesn't block our IDE
+                let gtk_launch = Command::new(&gtkwave)
+                    .current_dir(&proj.root)
+                    .arg("dump.vcd")
+                    .spawn();
+
+                match gtk_launch {
+                    Ok(_) => self.console_output += "Simulation Success! GTKWave opened.\n",
+                    Err(e) => self.console_output += &format!("Failed to launch GTKWave: {}. Check if DLLs are in the GTKWave bin folder.\n", e),
+                }
             }
             Ok(out) => self.console_output = format!("Verilog Error:\n{}", String::from_utf8_lossy(&out.stderr)),
-            Err(e) => self.console_output = format!("Tool Error: {}\n", e),
+            Err(e) => self.console_output = format!("Tool Error: {}\nCheck tool paths in vendor folder.", e),
         }
     }
 }
@@ -265,6 +298,7 @@ impl eframe::App for VerilogApp {
                             .with_theme(ColorTheme::GRUVBOX)
                             .with_syntax(Syntax::rust())
                             .with_numlines(true)
+                            .with_fontsize(18.0)
                             .show(ui, &mut self.code);
                     } else {
                         ui.centered_and_justified(|ui| { ui.label("Select or create a file to start."); });
