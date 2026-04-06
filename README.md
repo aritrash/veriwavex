@@ -1,64 +1,71 @@
-# VeriWaveX - v1.0
-> **A Modern, Portable Verilog IDE for Computer Architecture Labs.**
+# VeriWaveX - v1.1.0 (Gold Release)
+> **The Professional, Cross-Platform Verilog IDE for Engineering Labs.**
 
 [![Rust](https://img.shields.io/badge/built%20with-Rust-orange?style=for-the-badge&logo=rust)](https://www.rust-lang.org/)
-[![License](https://img.shields.io/badge/license-Apache%202.0-blue?style=for-the-badge)](LICENSE)
-[![Platform](https://img.shields.io/badge/platform-Windows%2011-brightgreen?style=for-the-badge&logo=windows)](https://www.microsoft.com/windows)
-[![Version](https://img.shields.io/badge/version-1.0.0--beta-red?style=for-the-badge)](https://github.com/your-username/veriwavex/releases)
+[![License](https://img.shields.io/badge/license-Proprietary-gold?style=for-the-badge)](LICENSE)
+[![Platform](https://img.shields.io/badge/platform-Windows%20|%20Linux-brightgreen?style=for-the-badge)](https://github.com/your-username/veriwavex/releases)
+[![Version](https://img.shields.io/badge/version-1.1.0--stable-green?style=for-the-badge)](https://github.com/your-username/veriwavex/releases)
 
 ---
 
 ![VeriWaveX Splash](assets/splash.png)
 
 ## Overview
-**VeriWaveX** is a lightweight, portable Integrated Development Environment (IDE) designed specifically for students and engineers working in Computer Architecture Labs. It eliminates the frustration of environment setup by bundling the **Icarus Verilog** compiler and **GTKWave** waveform viewer into a single, cohesive Windows application.
+**VeriWaveX** is a high-performance, unified Integrated Development Environment (IDE) built to eliminate environment friction in Computer Architecture and Digital Logic labs. By orchestrating the **Icarus Verilog** engine and **GTKWave** visualizer into a single, hardware-accelerated suite, VeriWaveX provides a "Zero-Config" experience for both Windows and Linux users.
 
-Built with **Rust** and the **egui** framework, VeriWaveX offers a high-performance, GPU-accelerated interface that works right out of the box.
-
----
-
-## Key Features
-
-- **One-Click Simulation**: Write your code and launch GTKWave instantly without touching the command line.
-- **Project Management**: Save your work using the custom `.vwx` project format to keep source files and testbenches organized.
-- **File Creation Wizard**: 
-    - **Module Wizard**: Define your input/output pins and auto-generate Verilog boilerplate.
-    - **Testbench Wizard**: Automatically generates `$dumpfile` and `$dumpvars` hooks—no more "empty waveform" errors.
-- **Integrated Console**: Real-time syntax error reporting directly from the Icarus engine.
-- **Modern UI**: A clean, distraction-free environment featuring the community-favorite **Gruvbox** color theme.
+With the **v1.1.0 Gold Release**, VeriWaveX has evolved into a fully cross-platform tool, featuring a portable Linux AppImage designed specifically for locked-down lab environments where `sudo` access is unavailable.
 
 ---
 
-## Built With
+## 🚀 Key Features (v1.1.0 Upgrade)
 
-* [Rust](https://www.rust-lang.org/) - Core logic and systems orchestration.
-* [eframe/egui](https://github.com/emilk/egui) - Hardware-accelerated Immediate Mode GUI.
-* [Icarus Verilog](http://iverilog.icarus.com/) - The simulation engine.
-* [GTKWave](http://gtkwave.sourceforge.net/) - The waveform visualization tool.
-
----
-
-## Getting Started
-
-### Installation
-1. Navigate to the [Releases](https://github.com/your-username/veriwavex/releases) page.
-2. Download `VeriWaveX_Setup.exe`.
-3. Run the installer (If Windows SmartScreen appears, click *More Info* -> *Run Anyway*).
-4. Launch **VeriWaveX** from your Desktop.
-
-### Your First Simulation
-1. Click **Create New Project** and select a folder.
-2. Use the **New File** button to create a Module (e.g., `and_gate`).
-3. Use the wizard again to create a **Testbench** for that module.
-4. Hit **Simulate** and watch your waveforms appear!
+- **Unified Cross-Platform Core**: Re-engineered logic that automatically detects toolchains on Windows and Linux/WSL.
+- **Industrial Syntax Highlighting**: A custom-built Verilog lexer featuring the **Gruvbox** theme, specifically tuned for hardware description keywords and system tasks.
+- **Smart Project Persistence**: A new "Recent Projects" dashboard backed by JSON persistence for instant workflow resumption.
+- **AppImage Portability**: A single-file Linux distribution that runs directly from a USB stick without installation.
+- **Commercial UI/UX**: 
+    - **Fullscreen Mode**: Launches maximized for a professional IDE feel.
+    - **Dynamic Status Bar**: Real-time project metadata and system status tracking.
+    - **Auto-Scroll Console**: Intelligent log output that ensures the latest simulation data is always visible.
+- **The Wizard Suite**: 
+    - **Module Wizard**: Rapidly define pins and boilerplate.
+    - **Testbench Wizard**: Automatic generation of `$dumpfile` and `$dumpvars` to prevent empty waveform errors.
 
 ---
 
-## Contributing
-Currently there is no scope of contributing, but in future there might be.
+## 🛠️ Built With
 
-**Developed with ❤️ by [Aritrash Sarkar](https://github.com/your-username)** *Innovation Ambassador | CSE Student | Lead at The Darkness Factor*
+* [Rust](https://www.rust-lang.org/) - Performance-critical systems orchestration.
+* [eframe/egui](https://github.com/emilk/egui) - GPU-accelerated Immediate Mode GUI.
+* [Icarus Verilog](http://iverilog.icarus.com/) - High-fidelity simulation engine.
+* [GTKWave](http://gtkwave.sourceforge.net/) - Industry-standard waveform visualization.
 
 ---
-### License
-This project is licensed under the **Apache License 2.0** - see the [LICENSE](LICENSE) file for details.
+
+## 📥 Getting Started
+
+### Windows Installation
+1. Download `VeriWaveX_v1.1.0_Setup.exe` from the [Releases](https://github.com/your-username/veriwavex/releases) page.
+2. Run the installer and launch from the Desktop shortcut.
+3. **Note**: No external installation of Icarus Verilog is required; it is bundled in the `vendor` directory.
+
+### Linux (Ubuntu/WSL) Usage
+1. Download `VeriWaveX-v1.1.0-x86_64.AppImage`.
+2. Open your terminal and grant execution permission:
+   ```bash
+   chmod +x VeriWaveX-v1.1.0-x86_64.AppImage
+   ```
+3. Launch the app:
+    ```bash
+    ./VeriWaveX-v1.1.0-x86_64.AppImage
+    ```
+4. Note: Requires iverilog and gtkwave to be present on the system.
+
+## License & Copyright
+### Copyright (c) 2023 Aritrash Sarkar. All Rights Reserved.
+VeriWaveX is distributed under a Proprietary License.
+
+- Educational Use: Granted free of charge for students and academic institutions.
+- Modification/Redistribution: Unauthorized copying, modification, or redistribution of the source code or binary is strictly prohibited.
+
+Developed with ❤️ by Aritrash Sarkar Innovation Ambassador | CSE Student at MSIT
