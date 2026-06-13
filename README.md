@@ -7,7 +7,7 @@ Developed by Aritrash Sarkar
 [![Rust](https://img.shields.io/badge/built%20with-Rust-orange?style=for-the-badge&logo=rust)](https://www.rust-lang.org/)
 [![License](https://img.shields.io/badge/license-Proprietary-gold?style=for-the-badge)](LICENSE)
 [![Platform](https://img.shields.io/badge/platform-Windows%20|%20Linux-brightgreen?style=for-the-badge)](https://github.com/aritrash/veriwavex/releases)
-[![Version](https://img.shields.io/badge/version-1.1.0--stable-green?style=for-the-badge)](https://github.com/aritrash/veriwavex/releases)
+[![Version](https://img.shields.io/badge/version-2.0.1--stable-green?style=for-the-badge)](https://github.com/aritrash/veriwavex/releases)
 
 ## Built With
 
