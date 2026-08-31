@@ -1,4 +1,4 @@
-# VeriWaveX v2.0.1 - Professional Verilog Simulation Suite
+# VeriWaveX v2.0.1 - Experimental Verilog Simulation Suite
 
 VeriWaveX is a high-performance, cross-platform Electronic Design Automation (EDA) suite designed for Verilog HDL development, simulation, and synthesis. Built with Rust and powered by industrial-grade open-source backends, it provides a seamless bridge between code and hardware visualization.
 
